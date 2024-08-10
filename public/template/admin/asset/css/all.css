@@ -1,0 +1,28 @@
+.main__btn {
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #fff;
+}
+.main__editor {
+    display: flex;
+    justify-content: end;
+}
+.main__upload__img img {
+    width: 150px;
+    height: 180px;
+}
+.main__table__product__image {
+    width: 80px;
+    height: 50px;
+}
+.hidden {
+    display: none !important;
+}
+
+/*
+
+*/

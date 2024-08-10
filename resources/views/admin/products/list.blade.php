@@ -1,0 +1,61 @@
+@extends('admin.main')
+
+@section('container')
+    <div class="d-flex justify-content-end mt-2 mb-3 px-2">
+        <a href="/admin/product/add" class="text-dark"><i class="fas fa-plus"></i></a>
+    </div>
+    @if (count($products) != 0)
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 40px;">ID</th>
+                    <th>HÌNH</th>
+                    <th>TÊN SP</th>
+                    <th>MENU</th>
+                    <th>TRẠNG THÁI</th>
+                    <th>SLIDER</th>
+                    <th>NGÀY CẬP NHẬT</th>
+                    <th>NGÀY TẠO</th>
+                    <th>TK TẠO</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr>
+                        <td>{{ $product->id }}</td>
+                        <td>
+                            <img class="main__table__product__image" src="{{ $product->thumb }}" alt="">
+                        </td>
+                        <td>{{ $product->title }}</td>
+                        <td>{{ $product->menu->name }}</td>
+                        <td>{!! App\helpers\helper::isStatus($product->is_status) !!}</td>
+                        <td>
+                            <a href="/admin/product/slider/add/{{ $product->id }}">
+                                <i class="fas fa-upload"></i>
+                            </a>
+                        </td>
+                        <td>{{ $product->updated_at }}</td>
+                        <td>{{ $product->created_at }}</td>
+                        <td><a href="#">{{ $product->user->name }}</a></td>
+                        <td>
+                            <div class="main__editor">
+                                <a href="/admin/product/edit/{{ $product->id }}" class="main__btn bg-primary">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+
+                                <a href="javascript:void(0)" onclick="OnRemove('/admin/product/delete', {{ $product->id }})" class="main__btn bg-danger ml-2">
+                                <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-center">
+            {{ $products->links() }}
+        </div>
+    @endif
+@endsection
