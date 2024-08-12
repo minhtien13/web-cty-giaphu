@@ -51,18 +51,7 @@
 
                 <p class="contact__main__info-txt">kết nối</p>
                 <div class="contact__main__social">
-                  <ul>
-                    <li>
-                      <a href="#">
-                        <img src="/template/asset/images/Facebook.jpg" alt="">
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <img src="/template/asset/images/instagam.PNG" alt="">
-                      </a>
-                    </li>
-                  </ul>
+                    @include('connects.list')
                 </div>
               </div>
             </div>

@@ -1,3 +1,4 @@
+/* btn CSS */
 .main__btn {
     display: inline-flex;
     width: 30px;
@@ -11,6 +12,7 @@
     display: flex;
     justify-content: end;
 }
+/* css image */
 .main__upload__img img {
     width: 150px;
     height: 180px;
@@ -23,6 +25,10 @@
     display: none !important;
 }
 
-/*
-
-*/
+/* Social Media CSS */
+.main__social__image img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100rem;
+    object-fit: cover;
+}

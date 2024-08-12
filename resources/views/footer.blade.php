@@ -56,18 +56,7 @@
             <div class="ooter__main__list__war">
               <h3 class="footer__main__heading">kêt nối</h3>
               <div class="footer__main__connect">
-                <ul>
-                  <li>
-                    <a href="#">
-                      <img src="/template/asset/images/Facebook.jpg" alt="" />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <img src="/template/asset/images/instagam.PNG" alt="" />
-                    </a>
-                  </li>
-                </ul>
+                    @include('connects.list')
               </div>
             </div>
           </li>

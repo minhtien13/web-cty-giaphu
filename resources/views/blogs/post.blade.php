@@ -88,23 +88,7 @@
             </div>
 
             <div class="blog__contact__info__soclai">
-              <ul>
-                <li>
-                  <a href="#">
-                    <img src="/template/asset/images/Facebook.jpg" alt="">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/template/asset/images/instagam.PNG" alt="">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/template/asset/images/Facebook.jpg" alt="">
-                  </a>
-                </li>
-              </ul>
+                @include('connects.list')
             </div>
           </div>
         </div>

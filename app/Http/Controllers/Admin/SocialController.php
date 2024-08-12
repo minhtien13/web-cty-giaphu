@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\social\socialService;
-use App\Models\c;
+use App\Models\Social;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SocialController extends Controller
 {
@@ -22,7 +23,10 @@ class SocialController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.socials.list', [
+            'title' => 'Danh sách kết nối',
+            'socials' =>  $this->social->get()
+        ]);
     }
 
     /**
@@ -56,17 +60,7 @@ class SocialController extends Controller
         ]);
 
         $this->social->insert($request);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\c  $c
-     * @return \Illuminate\Http\Response
-     */
-    public function show(c $c)
-    {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -75,9 +69,12 @@ class SocialController extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function edit(c $c)
+    public function edit(Social $social)
     {
-        //
+        return view('admin.socials.edit', [
+            'title' => 'Cập nhật kết nối: ' . $social->name,
+            'social' => $social
+        ]);
     }
 
     /**
@@ -87,9 +84,27 @@ class SocialController extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, c $c)
+    public function update(Request $request, Social $social)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'is_link' => 'required',
+            'thumb' => 'required'
+        ], [
+            'name.required' => 'Vui lòng nhâp tên',
+            'is_link.required' => 'Vui lòng dán đường dẫn',
+            'thumb.required' => 'Vui lòng tải hình lên',
+        ]);
+
+        $Social = $this->social->update($social, $request);
+        if ($Social) {
+            Session::flash('success', 'Đã cập nhật kết nối thành công');
+            return redirect('/admin/social/list');
+
+        }
+
+        Session::flash('error', 'Cập nhật kết nối không thành công');
+        return redirect()->back();
     }
 
     /**
@@ -98,8 +113,11 @@ class SocialController extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function destroy(c $c)
+    public function destroy(Request $request)
     {
-        //
+        $social = $this->social->remove($request);
+        return $social ?
+               response()->json(['error' => false, 'message' => 'Đã thực xóa kết nối thành công'])
+               : response()->json(['error' => false, 'message' => 'Thực xóa kết nối không thành công']);
     }
 }
