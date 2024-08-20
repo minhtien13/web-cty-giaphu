@@ -1,6 +1,9 @@
 @extends('admin.main')
 
 @section('container')
+
+@include('admin.card')
+
     <form action="" method="POST">
       <div class="card-body">
         <div class="form-group">

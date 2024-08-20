@@ -1,6 +1,9 @@
 @extends('admin.main')
 
 @section('container')
+
+@include('admin.card')
+
 <div class="main"></div>
 
 @endsection

@@ -1,6 +1,9 @@
 @extends('admin.main')
 
 @section('container')
+
+@include('admin.card')
+
 <div class="container mt-3">
     <div class="row">
         <div class="col-12">

@@ -5,34 +5,33 @@
     @include('Admin.head')
 </head>
 <body class="hold-transition sidebar-mini">
+
+<div class="pt-2 pb-2 bg-info">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 d-flex align-items-center">
+                <p class="m-0">Admin: <a href="/admin/user/logout" class="text-light link-danger">Đăng xuất</a></p>
+            </div>
+            <div class="col-6">
+                <div class="d-flex justify-content-end align-items-center">
+                    <span class="main__tabbar-name text-capitalize">{{ \Auth::user()->name }}</span>
+                    <div class="ml-2">
+                        <img src="/template/admin/asset/dist/img/user2-160x160.jpg" height="30" width="30" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="wrapper">
   <!-- Navbar -->
   @include('Admin.header')
   <!-- /.navbar -->
 
+
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <div class="sidebar">
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/template/admin/asset/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">{{ \Auth::user()->name }}</a>
-        </div>
-      </div>
-
-      {{-- <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div> --}}
-
       @include('admin.nav')
     </div>
   </aside>
@@ -46,12 +45,8 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">{{ $title }}</h3>
+             @yield('container')
             </div>
-           @yield('container')
-         </div>
-
         </div>
       </div>
     </section>

@@ -72,8 +72,6 @@
             </ul>
         </li>
 
-
-
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-link"></i>
@@ -96,6 +94,49 @@
                     </a>
                 </li>
             </ul>
+        </li>
+    </ul>
+
+    @if (\Auth::user()->is_level == 1)
+    <div class="mt-1 mb-1 p-1 bg-primary">
+        <span>
+            QUẢN TRỊ VIÊN
+        </span>
+    </div>
+
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                TÀI KHOẢN
+                <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/admin/account/add" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Thêm tài khoản mới</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/account/list" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Danh sách tài khoản</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    @endif
+
+    <ul class="nav nav-pills nav-sidebar flex-column mt-2">
+        <li class="nav-item">
+            <a href="/admin/user/logout" class="nav-link" >
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                ĐĂNG NHẬP
+            </a>
         </li>
     </ul>
 </nav>

@@ -32,4 +32,10 @@ class LoginController extends Controller
         Session::flash('error', 'Vui lòng đăng nhập lại');
         return redirect()->back();
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/admin/user/login');
+    }
 }

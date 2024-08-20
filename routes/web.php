@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\IntroController;
 use App\Http\Controllers\Admin\LoginController;
@@ -58,9 +59,10 @@ Route::get('/gioi-thieu', function() {
 // Login Admin
 Route::get('/admin/user/login', [LoginController::class, 'index'])->name('login');
 Route::post('/admin/user/login', [LoginController::class, 'login']);
+Route::get('/admin/user/logout', [LoginController::class, 'logout']);
 
 // Admin
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth', 'authStatus'])->group(function() {
     Route::get('/admin', [MainController::class, 'index']);
 
     Route::prefix('admin')->group(function() {
@@ -123,7 +125,7 @@ Route::middleware(['auth'])->group(function() {
         // Tài khoản của cấp quản lý
         Route::middleware(['authMaster'])->group(function() {
 
-            //
+            // Contact
             Route::prefix('contact')->group(function() {
                 Route::get('add', [ContactController::class, 'create']);
                 Route::post('add', [ContactController::class, 'store']);
@@ -133,6 +135,7 @@ Route::middleware(['auth'])->group(function() {
                 Route::post('delete', [ContactController::class, 'destroy']);
             });
 
+            // intro
             Route::prefix('intro')->group(function() {
                 Route::get('add', [IntroController::class, 'create']);
                 Route::post('add', [IntroController::class, 'store']);
@@ -140,6 +143,21 @@ Route::middleware(['auth'])->group(function() {
                 Route::get('edit/{intro}', [IntroController::class, 'edit']);
                 Route::post('edit/{intro}', [IntroController::class, 'update']);
                 Route::post('delete', [IntroController::class, 'destroy']);
+            });
+
+            //
+            Route::prefix('account')->group(function() {
+                Route::get('add', [AccountController::class, 'create']);
+                Route::post('add', [AccountController::class, 'store']);
+                Route::get('list', [AccountController::class, 'index']);
+                Route::get('edit/{account}', [AccountController::class, 'edit']);
+                Route::post('edit/{account}', [AccountController::class, 'update']);
+                Route::post('delete', [AccountController::class, 'destroy']);
+
+                //
+                Route::prefix('info')->group(function() {
+                    Route::get('{user}', [AccountController::class, 'info']);
+                });
             });
         });
 
