@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>{{ $title }}</title>
     <link rel="stylesheet" href="/template/admin/user/assets/css/main.css" />
   </head>
   <body>
@@ -11,11 +11,14 @@
       <div class="admin-form__main">
         <h2 class="admin__heading">Đăng nhập vào cty</h2>
         <p class="admin__text">
-          Bạn có chưa tài khoản <a href="#">đăng ký tại đây</a>
+          Bạn có chưa tài khoản <a href="/admin/user/register">đăng ký tại đây</a>
         </p>
         <div class="admin-form__container">
             @if (Session::has('error'))
                 <p class="message message__danger">{{ Session::get('error') }}</p>
+            @endif
+            @if (Session::has('success'))
+                <p class="message message__success">{{ Session::get('success') }}</p>
             @endif
 
           <form action="" method="post">

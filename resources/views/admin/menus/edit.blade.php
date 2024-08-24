@@ -2,6 +2,18 @@
 
 @section('container')
 
+<div class="mb-4 pr-2 d-flex justify-content-end">
+    <a href="/admin/menu/add" class="btn btn-success mr-2">
+        <i class="fas fa-plus mr-1"></i>
+        Tạo Mới
+    </a>
+    <a href="/admin/menu/list" class="btn btn-primary">
+        <i class="fas fa-th-list mr-1"></i>
+        Danh Sách
+    </a>
+</div>
+
+
 @include('admin.card')
 
     <form action="" method="POST">

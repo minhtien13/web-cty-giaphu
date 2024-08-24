@@ -2,6 +2,13 @@
 
 @section('container')
 
+<div class="mb-4 pr-2 d-flex justify-content-end">
+    <a href="/admin/product/list" class="btn btn-primary">
+        <i class="fas fa-th-list mr-1"></i>
+        Danh Sách
+    </a>
+</div>
+
 @include('admin.card')
 
     <div class="d-flex justify-content-end mt-2 mb-3 px-2">

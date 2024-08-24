@@ -32,8 +32,8 @@ class accountService
                 'email' => $request->input('email'),
                 'phone' => $request->input('phone'),
                 'password' => Hash::make($request->input('password')),
-                'is_status' => $request->input('is_status'),
-                'is_level' => $request->input('is_level')
+                'is_status' => $request->input('is_status', 0),
+                'is_level' => $request->input('is_level', 2)
             ];
 
            $result = User::create($user);
@@ -48,6 +48,34 @@ class accountService
 
         } catch (\Exception $error) {
             Session::flash('error', 'Tạo tài khoản không thành công');
+            return false;
+        }
+    }
+
+    public function register($request)
+    {
+        try {
+            $user = [
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'phone' => $request->input('phone'),
+                'password' => Hash::make($request->input('password')),
+                'is_status' => 0,
+                'is_level' => 0
+            ];
+
+            $result = User::create($user);
+            if ($result) {
+                 $this->insertInfo($request, $result->id);
+                 Session::flash('success', 'Đã đăng ký tài khoản thành công');
+                 return true;
+            }
+
+            Session::flash('error', 'Đăng ký tài khoản không thành công');
+            return false;
+
+        } catch (\Exception $error) {
+            Session::flash('error', 'Đăng ký tài khoản không thành công');
             return false;
         }
     }
@@ -98,7 +126,7 @@ class accountService
     {
         $userInfo = [
             'info_email' => $request->input('info_email'),
-            'user_create' => Auth::user()->id,
+            'user_create' => isset(Auth::user()->id) ? Auth::user()->id : 0,
             'user_id' => $userId,
             'date_register' => date('m/d/Y'),
             'is_role' => 0

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductSliderController;
+use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\UploadFileController;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,10 @@ Route::get('/gioi-thieu', function() {
 Route::get('/admin/user/login', [LoginController::class, 'index'])->name('login');
 Route::post('/admin/user/login', [LoginController::class, 'login']);
 Route::get('/admin/user/logout', [LoginController::class, 'logout']);
+
+// Register Account Admin
+Route::get('/admin/user/register', [RegisterController::class, 'create'])->name('register');
+Route::post('/admin/user/register', [RegisterController::class, 'register']);
 
 // Admin
 Route::middleware(['auth', 'authStatus'])->group(function() {

@@ -2,6 +2,17 @@
 
 @section('container')
 
+<div class="mb-4 pr-2 d-flex justify-content-end">
+    <a href="/admin/post/add" class="btn btn-success mr-2">
+        <i class="fas fa-plus mr-1"></i>
+        Tạo Mới
+    </a>
+    <a href="/admin/post/list" class="btn btn-primary">
+        <i class="fas fa-th-list mr-1"></i>
+        Danh Sách
+    </a>
+</div>
+
     @include('admin.card')
 
     <div class="d-flex justify-content-end mt-2 mb-3 px-2">
