@@ -6,7 +6,7 @@
 
 <div class="container mt-3">
     <div class="row">
-        <div class="col-12">
+        <div class="col-8">
             <div class="p-2">
                 <p class="mb-1">Mô tả ngắn về công ty</p>
                 <span>
@@ -26,6 +26,8 @@
                 <a href="javacript:void(0)" onclick="OnRemove('/admin/intro/delete', {{ $intro->id }})" class="text-danger ml-2">Xóa</a>
             </div>
         </div>
+
+        @include('admin.contacts.menu')
     </div>
 </div>
 @endsection

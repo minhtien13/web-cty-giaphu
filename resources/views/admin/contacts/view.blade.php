@@ -25,6 +25,8 @@
                     <a href="javacript:void(0)" onclick="OnRemove('/admin/contact/delete', {{ $contact->id }})" class="text-danger ml-2">Xóa</a>
                 </div>
             </div>
+
+            @include('admin.contacts.menu')
         </div>
     </div>
 @endsection
