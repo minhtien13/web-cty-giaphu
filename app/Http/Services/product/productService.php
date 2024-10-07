@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\product;
 
+use App\Helpers\helper;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -28,10 +29,11 @@ class productService
         }
     }
 
-    public function get()
+    public function get($search = '')
     {
         return Product::with('menu')->with('user')->orderByDesc("id")
-        ->paginate(20);
+                       ->where('title', 'LIKE', '%' . $search . '%')
+                       ->paginate(20);
     }
 
     public function checkUrl($request)
@@ -59,8 +61,9 @@ class productService
     {
         try {
             $productID = (int)$request->input("id");
-            $result = Product::where("id", $productID)->first();
+            $result = Product::where("id", $productID)->select('id', 'thumb')->first();
             if ($result) {
+                helper::removeFile($result->thumb);
                 Product::where("id", $productID)->delete();
                 return true;
             }

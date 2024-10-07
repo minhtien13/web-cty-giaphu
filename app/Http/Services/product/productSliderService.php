@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\product;
 
+use App\Helpers\helper;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -41,9 +42,26 @@ class productSliderService
     public function remove($request)
     {
         $id = $request->input('id');
-        $slider = DB::table('product_slider')->where('id', $id)->first();
+        $slider = DB::table('product_slider')->where('id', $id)->select('id', 'thumb')->first();
         if ($slider) {
+            helper::removeFile($slider->thumb);
             $slider = DB::table('product_slider')->where('id', $id)->delete();
+            return true;
+        }
+
+        return false;
+    }
+
+    public function removeSliderToProductAll($request)
+    {
+        $id = $request->input('id');
+        $sliders = DB::table('product_slider')->where('product_id', $id)->select('id', 'thumb')->get();
+        if ($sliders) {
+            foreach ($sliders as $slider) {
+                helper::removeFile($slider->thumb);
+            }
+
+            DB::table('product_slider')->where('product_id', $id)->delete();
             return true;
         }
 

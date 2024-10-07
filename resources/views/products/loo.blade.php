@@ -27,7 +27,7 @@
                     </span>
 
                     <div class="product__wrapper__info-buttom">
-                        <a href="/dich-vu/{{ $product->is_link }}.html" class="product__wrapper__info-btn btn">
+                        <a href="/dich-vu/{{ $product->is_link }}" class="product__wrapper__info-btn btn">
                         Xem thêm <i class="fa-solid fa-chevron-right"></i>
                         </a>
                     </div>

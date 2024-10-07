@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\post;
 
+use App\Helpers\helper;
 use App\Models\Post;
 use Illuminate\Support\Facades\Session;
 
@@ -80,6 +81,7 @@ class postService
         $result = Post::where("id", $postID)->first();
 
         if ($result) {
+            helper::removeFile($result->thumb);
             Post::where("id", $postID)->delete();
             return true;
         }

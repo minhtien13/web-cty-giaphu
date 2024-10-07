@@ -40,11 +40,17 @@
                 <td>{{ $account->name }}</td>
                 <td>{!! App\helpers\helper::isStatus($account->is_status) !!}</td>
                 <td>
-                    <a href="/admin/account/info/{{ $account->id }}"><i class="fas fa-window-maximize"></i></a>
+                    <a href="/admin/account/info/{{ $account->id }}">
+                        thông tin tài khoản
+                    </a>
                 </td>
                 <td>
                     <div class="main__editor">
-                        <a href="/admin/account/edit/{{ $account->id }}" class="main__btn bg-primary">
+                        <a href="/admin/account/password/{{ $account->id }}" class="main__btn bg-primary">
+                            <i class="fas fa-lock"></i>
+                        </a>
+
+                        <a href="/admin/account/edit/{{ $account->id }}" class="main__btn bg-primary ml-2">
                             <i class="fas fa-edit"></i>
                         </a>
 

@@ -1,17 +1,32 @@
 @extends('admin.main')
 
 @section('container')
+<div class="row mb-4 mt-3 pl-2 pr-2">
+    <div class="col-4">
+        <form action="" method="get">
+            <div class="d-flex">
+                <button class="btn btn-primary" id="basic-addon1">
+                    <i class="fas fa-search"></i>
+                </button>
+                <input type="text" class="form-control" name="search" placeholder="Tìm kiếm sản phẩm" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+        </form>
 
-<div class="mb-4 pr-2 d-flex justify-content-end">
-    <a href="/admin/product/add" class="btn btn-success mr-2">
-        <i class="fas fa-plus mr-1"></i>
-        Tạo Mới
-    </a>
-    <a href="/admin/product/list" class="btn btn-primary">
-        <i class="fas fa-th-list mr-1"></i>
-        Danh Sách
-    </a>
+    </div>
+    <div class="col-8">
+        <div class="d-flex justify-content-end">
+            <a href="/admin/product/add" class="btn btn-success mr-2">
+                <i class="fas fa-plus mr-1"></i>
+                Tạo Mới
+            </a>
+            <a href="/admin/product/list" class="btn btn-primary">
+                <i class="fas fa-th-list mr-1"></i>
+                Danh Sách
+            </a>
+        </div>
+    </div>
 </div>
+
 
 @include('admin.card')
 

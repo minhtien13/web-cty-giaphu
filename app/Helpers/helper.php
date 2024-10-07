@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Menu;
 use App\Models\Product;
+use Illuminate\Support\Facades\File;
 
 class helper
 {
@@ -63,6 +64,14 @@ class helper
                               '<span class="text-danger">không công khai</span>';
     }
 
+    public static function removeFile($url)
+    {
+        $url = trim($url, '/');
+        if (File::exists($url)) {
+            File::delete($url);
+        }
+    }
+
     public static function loadProductMenu($menuId)
     {
         $html = '';
@@ -89,7 +98,7 @@ class helper
                         />
                         </div>
                         <div class="product__wrapper__info">
-                        <a href="/dich-vu/'. $product->is_link . '.html" class="product__wrapper__info-title">
+                        <a href="/dich-vu/'. $product->is_link . '" class="product__wrapper__info-title">
                             <h2>'. $product->title .'</h2>
                         </a>
                         <div class="product__wrapper__content">
@@ -98,7 +107,7 @@ class helper
                             </span>
 
                             <div class="product__wrapper__info-buttom">
-                            <a href="/dich-vu/'. $product->is_link . '.html" class="product__wrapper__info-btn btn">
+                            <a href="/dich-vu/'. $product->is_link . '" class="product__wrapper__info-btn btn">
                                 Xem thêm <i class="fa-solid fa-chevron-right"></i>
                             </a>
                             </div>

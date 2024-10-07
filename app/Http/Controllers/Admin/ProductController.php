@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\product\productFormRequest;
 use App\Http\Services\menu\menuService;
 use App\Http\Services\product\productService;
+use App\Http\Services\product\productSliderService;
 use App\Models\c;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -15,11 +16,15 @@ class ProductController extends Controller
 {
     protected $MenuService = '';
     protected $productService = '';
+    protected $productSliderService = '';
 
-    public function __construct(menuService $menuService, productService $product)
+
+    public function __construct(menuService $menuService, productService $product, productSliderService $productSlider)
     {
         $this->MenuService = $menuService;
         $this->productService = $product;
+        $this->productSliderService = $productSlider;
+
     }
 
     /**
@@ -27,12 +32,15 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = !is_null($request->input('search')) ? $request->input('search') : '';
+        $title = $search != '' ? 'đã tìm kiếm' : '';
+
         return view('admin.products.list', [
-            'title' => 'Danh sách sản phẩm',
+            'title' => 'Danh sách sản phẩm ' . $title,
             'menus' => $this->MenuService->get(),
-            'products' => $this->productService->get()
+            'products' => $this->productService->get($search)
         ]);
     }
 
@@ -121,6 +129,7 @@ class ProductController extends Controller
     public function destroy(Request $request)
     {
         $result = $this->productService->remove($request);
+        $this->productSliderService->removeSliderToProductAll($request);
         return $result ?
                response()->json(['error' => false, 'message' => 'Đã thực hiện xóa sản phẩm thành công']):
                response()->json(['error' => false, 'message' => 'Thực hiện xóa sản phẩm không thành công']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\social;
 
+use App\Helpers\helper;
 use App\Models\Social;
 use Illuminate\Support\Facades\Session;
 
@@ -47,6 +48,7 @@ class socialService
         $result = Social::where("id", $socialID)->first();
 
         if ($result) {
+            helper::removeFile($result->thumb);
             Social::where("id", $socialID)->delete();
             return true;
         }

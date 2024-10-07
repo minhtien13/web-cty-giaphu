@@ -3,12 +3,11 @@
 namespace App\Http\Services\account;
 
 use App\Models\User;
+use Faker\Extension\Extension;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-
-use function PHPUnit\Framework\isNull;
 
 class accountService
 {
@@ -105,19 +104,34 @@ class accountService
         }
     }
 
+    public function changePassword($account, $request)
+    {
+        try {
+            $account['password'] = Hash::make($request->input('password'));
+            $account->save();
+            return true;
+        }catch (Extension $error) {
+            return false;
+        }
+    }
+
     public function remove($request)
     {
-        $accountID = (int)$request->input("id");
+        try {
+            $accountID = (int)$request->input("id");
 
-        $result = User::where("id", $accountID)->first();
+            $result = User::where("id", $accountID)->first();
 
-        if ($result) {
-            DB::table('user_infos')->where('user_id', $accountID)->delete();
-            User::where("id", $accountID)->delete();
-            return true;
+            if ($result) {
+                DB::table('user_infos')->where('user_id', $accountID)->delete();
+                User::where("id", $accountID)->delete();
+                return true;
+            }
+
+            return false;
+        } catch (Extension $error) {
+            return false;
         }
-
-        return false;
     }
 
 

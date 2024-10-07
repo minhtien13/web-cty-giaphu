@@ -38,7 +38,7 @@
 
 
 
-  <div class="content-wrapper mt-5">
+  <div class="content-wrapper mt-4">
       <section class="content">
         @include('admin.alert')
       <div class="container-fluid">

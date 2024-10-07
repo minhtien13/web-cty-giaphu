@@ -150,7 +150,7 @@ Route::middleware(['auth', 'authStatus'])->group(function() {
                 Route::post('delete', [IntroController::class, 'destroy']);
             });
 
-            //
+            // Account
             Route::prefix('account')->group(function() {
                 Route::get('add', [AccountController::class, 'create']);
                 Route::post('add', [AccountController::class, 'store']);
@@ -159,7 +159,11 @@ Route::middleware(['auth', 'authStatus'])->group(function() {
                 Route::post('edit/{account}', [AccountController::class, 'update']);
                 Route::post('delete', [AccountController::class, 'destroy']);
 
-                //
+                #Change Password
+                Route::get('password/{account}', [AccountController::class, 'password']);
+                Route::post('password/{account}', [AccountController::class, 'resetPassword']);
+
+                #Info Account
                 Route::prefix('info')->group(function() {
                     Route::get('{user}', [AccountController::class, 'info']);
                 });

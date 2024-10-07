@@ -136,4 +136,32 @@ class AccountController extends Controller
             'user' => $this->account->getFirstUser($userInfo->user_create)
         ]);
     }
+
+    public function password(User $account)
+    {
+        return view('admin.accounts.password', [
+            'title' => 'Cấp lại mật khẩu',
+            'accounts' => $account
+        ]);
+    }
+
+    public function resetPassword(Request $request, User $account)
+    {
+        $request->validate([
+            'password' => 'required|confirmed|min:6'
+        ], [
+            'password.required' => 'Vui lòng nhập mật khấu mới',
+            'password.confirmed' => 'Vui lòng nhập mật khấu xác nhận',
+            'password.min' => 'Mật khấu bắt buột từ 6 ký tự trở lên',
+        ]);
+
+        $result = $this->account->changePassword($account, $request);
+        if ($result) {
+            Session::flash('success', 'Đã cập nhật mật khẩu thành công');
+            return redirect('/admin/account/list');
+        }
+
+        Session::flash('error', 'Cập nhật mật khẩu không thành công');
+        return redirect('/admin/account/list');
+    }
 }
