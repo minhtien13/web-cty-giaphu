@@ -29,7 +29,6 @@ class LoginController extends Controller
              'password' => $request->input('password')
             ], $renamer)) {
 
-            $this->dateLoginUser();
             return redirect('/admin');
         }
 
@@ -43,20 +42,5 @@ class LoginController extends Controller
         return redirect('/admin/user/login');
     }
 
-    public function dateLoginUser()
-    {
-        $userID = Auth::user()->id;
-        $user = DB::table('user_infos')->where('user_id', $userID)->first();
-        $data = [
-            'info_email' => $user->info_email,
-            'user_create' => $user->user_create,
-            'user_id' => $user->user_id,
-            'date_register' => $user->date_register,
-            'date_active' => $user->date_active,
-            'date_login' => date('m/d/Y'),
-            'is_role' => 0
-        ];
 
-        DB::table('user_infos')->where('user_id', $userID)->update($data);
-    }
 }

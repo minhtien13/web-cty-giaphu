@@ -35,7 +35,7 @@ Route::get('/dich-vu/{slug}', [App\Http\Controllers\ProductController::class, 'd
 
 Route::get('/search', [App\Http\Controllers\ProductController::class, 'search']);
 
-//
+// Trang tin tức
 Route::get('/tin-tuc', [App\Http\Controllers\PostController::class, 'index']);
 Route::get('/bai-viet/{slug}', [App\Http\Controllers\PostController::class, 'post']);
 
@@ -74,6 +74,7 @@ Route::middleware(['auth', 'authStatus'])->group(function() {
         Route::get('/', [MainController::class, 'index'])->name('admin');
         Route::post('upload-file', [UploadFileController::class, 'upload']);
 
+        #Menu
         Route::prefix('menu')->group(function() {
             Route::get('add', [MenuController::class, 'create']);
             Route::post('add', [MenuController::class, 'store']);
@@ -84,8 +85,9 @@ Route::middleware(['auth', 'authStatus'])->group(function() {
             Route::post('delete', [MenuController::class, 'destroy']);
         });
 
+        #Product
         Route::prefix('product')->group(function() {
-            //
+            // Product Main
             Route::get('add', [ProductController::class, 'create']);
             Route::post('add', [ProductController::class, 'store']);
             Route::post('check', [ProductController::class, 'check']);
@@ -94,7 +96,7 @@ Route::middleware(['auth', 'authStatus'])->group(function() {
             Route::post('edit/{product}', [ProductController::class, 'update']);
             Route::post('delete', [ProductController::class, 'destroy']);
 
-            //
+            // Product Slider
             Route::prefix('slider')->group(function() {
                 Route::get('add/{slider}', [ProductSliderController::class, 'create']);
                 Route::post('add/{slider}', [ProductSliderController::class, 'store']);
@@ -105,7 +107,7 @@ Route::middleware(['auth', 'authStatus'])->group(function() {
             });
         });
 
-        //
+        #Post
         Route::prefix('post')->group(function() {
             Route::get('add', [PostController::class, 'create']);
             Route::post('add', [PostController::class, 'store']);
@@ -115,7 +117,7 @@ Route::middleware(['auth', 'authStatus'])->group(function() {
             Route::post('delete', [PostController::class, 'destroy']);
         });
 
-        //
+        #Social
          Route::prefix('social')->group(function() {
             Route::get('add', [SocialController::class, 'create']);
             Route::post('add', [SocialController::class, 'store']);
@@ -123,6 +125,14 @@ Route::middleware(['auth', 'authStatus'])->group(function() {
             Route::get('edit/{social}', [SocialController::class, 'edit']);
             Route::post('edit/{social}', [SocialController::class, 'update']);
             Route::post('delete', [SocialController::class, 'destroy']);
+        });
+
+        // Account
+        Route::prefix('account')->group(function() {
+            Route::get('main/{account}', [AccountController::class, 'account']);
+            Route::post('main/{account}', [AccountController::class, 'updateAccount']);
+            Route::get('main/password/{account}', [AccountController::class, 'changePassword']);
+            Route::post('main/password/{account}', [AccountController::class, 'setPassword']);
         });
 
 

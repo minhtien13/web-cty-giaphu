@@ -115,6 +115,16 @@ class accountService
         }
     }
 
+    public function getAccountFirst($accountID)
+    {
+        try {
+            $result = User::where("id", $accountID)->select('id')->first();
+            return $result ? true : false;
+        } catch (Extension $error) {
+            return false;
+        }
+    }
+
     public function remove($request)
     {
         try {
@@ -134,6 +144,19 @@ class accountService
         }
     }
 
+    public function updateAccount($account, $request)
+    {
+        try {
+            $account['name'] = $request->input('name');
+            $account['email'] = $request->input('email');
+            $account['phone'] = $request->input('phone');
+            $account->save();
+            return true;
+        } catch (Extension $error) {
+            return false;
+        }
+
+    }
 
     // User Info
     public function insertInfo($request, $userId)

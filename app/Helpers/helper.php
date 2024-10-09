@@ -4,6 +4,8 @@ namespace App\Helpers;
 
 use App\Models\Menu;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class helper
@@ -185,6 +187,24 @@ class helper
        }
 
        return $number;
+    }
+
+    public static function dateLoginUser()
+    {
+        $userID = Auth::user()->id;
+        $user = DB::table('user_infos')->where('user_id', $userID)->first();
+        if (!$user) return false;
+        $data = [
+            'info_email' => $user->info_email,
+            'user_create' => $user->user_create,
+            'user_id' => $user->user_id,
+            'date_register' => $user->date_register,
+            'date_active' => $user->date_active,
+            'date_login' => date('m/d/Y'),
+            'is_role' => 0
+        ];
+
+        DB::table('user_infos')->where('user_id', $userID)->update($data);
     }
 
 }
